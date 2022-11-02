@@ -1,17 +1,30 @@
 library(tidyverse)
 library(jsonlite)
 
-jsonlite::fromJSON("https://www.breakingbadapi.com/api/")
+#https://github.com/AndreasFischer1985/tagesschau-api
 
-quotes = jsonlite::fromJSON("https://breakingbadapi.com/api/quotes") %>%
+jsonlite::fromJSON("https://www.tagesschau.de/api2/news")
+
+tagesschau = jsonlite::fromJSON("https://www.tagesschau.de/api2/news")$news %>%
   as_tibble()
-quotes
+tagesschau
 
-write_tsv(quotes, "bb_quotes.tsv")
+tagesschau %>%
+  select(title, date, url = shareURL) %>%
+  write_tsv("tagesschau.tsv")
 
-# Bonus
-quotes %>%
-  count(author, sort = T)
+sport = fromJSON("https://www.tagesschau.de/api2/news?ressort=sport")$news %>%
+  as_tibble
+sport
 
-quotes %>%
-  filter(series == "Better Call Saul")
+# Bonus Tags
+sport %>% unnest(tags) %>% count(tag, sort = T)
+
+# Bonus Bilder
+sport$teaserImage$mittelgross1x1$imageurl %>%
+  na.omit() %>%
+  head(25) %>%
+  magick::image_read() %>%
+  magick::image_montage(tile = 5, geometry = 'x120+2+2')
+
+
