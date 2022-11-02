@@ -1,1 +1,8 @@
+install.packages("remotes")
 install.packages("tidyverse")
+install.packages("magick")
+install.packages("ndjson")
+install.packages("jsonlite")
+install.packages("newsanchor")
+remotes::install_github("joon-e/mediacloud")
+remotes::install_github("JBGruber/traktok")
