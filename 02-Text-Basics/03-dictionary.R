@@ -58,6 +58,8 @@ sent_counts  = txt %>%
   mutate(percent = n/sum(n)*100) %>%
   ungroup()
 
+sent_counts
+
 sent_counts %>%
   ggplot(aes(x = ep, y = percent, group = sentiment, color = season))+
   geom_line()+
