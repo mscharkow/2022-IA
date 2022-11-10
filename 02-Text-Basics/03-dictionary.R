@@ -49,6 +49,7 @@ txt %>%
   geom_point()
 
 # Sentiment NRC
+get_sentiments("nrc")
 sent_counts  = txt %>%
   left_join(get_sentiments("nrc")) %>%
   filter(!is.na(sentiment) & !sentiment %in% c("positive", "negative")) %>%
