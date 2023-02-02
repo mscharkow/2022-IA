@@ -1,5 +1,6 @@
 install.packages("remotes")
 install.packages("tidyverse")
+install.packages("Hmisc")
 install.packages("magick")
 install.packages("gifski")
 install.packages("ndjson")
